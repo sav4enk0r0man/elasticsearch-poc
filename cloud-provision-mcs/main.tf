@@ -71,6 +71,32 @@ module "elasticsearch_node3" {
   elasticsearch_enable   = "${var.enable}"
 }
 
+# Provisioning logstash node1
+module "logstash_node1" {
+  source                 = "./logstash"
+
+  hostname               = "logstash1"
+  network_id             = "${openstack_networking_network_v2.elk_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.elk_subnet.id}"
+  logstash_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  logstash_enable        = "${var.enable}"
+}
+
+# Provisioning logstash node2
+module "logstash_node2" {
+  source                 = "./logstash"
+
+  hostname               = "logstash2"
+  network_id             = "${openstack_networking_network_v2.elk_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.elk_subnet.id}"
+  logstash_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  logstash_enable        = "${var.enable}"
+}
+
 # Provisioning kibana host
 module "kibana" {
   source                 = "./kibana"

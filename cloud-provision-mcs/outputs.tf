@@ -44,3 +44,26 @@ output "kibana_network" {
   description = "Kibana network"
   value = "${module.kibana.kibana_network}"
 }
+
+###############################################################################
+# Logstash hosts outputs
+###############################################################################
+output "logstash_node1_fip" {
+  description = "Logstash node1 fip"
+  value = "${module.logstash_node1.logstash_fip}"
+}
+
+output "logstash_node1_network" {
+  description = "Logstash network"
+  value = "${module.logstash_node1.logstash_network}"
+}
+
+output "logstash_node2_fip" {
+  description = "Logstash node2 fip"
+  value = "${module.logstash_node2.logstash_fip}"
+}
+
+output "logstash_node2_network" {
+  description = "Logstash network"
+  value = "${module.logstash_node2.logstash_network}"
+}
