@@ -1,5 +1,20 @@
 terraform {
   required_version = ">= 0.12"
+
+  backend "s3" {
+    bucket   = "elasticsearch-poc"
+    key      = "terraform.tfstate"
+    endpoint = "https://hb.bizmrg.com"
+    region   = "RegionOne"
+
+    skip_requesting_account_id = true
+    skip_credentials_validation = true
+    skip_get_ec2_platforms = true
+    skip_metadata_api_check = true
+    skip_region_validation = true
+
+    shared_credentials_file = "../.aws/credentials-terraform"
+  }
 }
 
 provider "openstack" {
