@@ -21,11 +21,6 @@ variable "ssh_private_key" {
   default = "rsa2048_r.savchenko_mail.ru"
 }
 
-variable "db_type" {
-  description = "Rundeck database type (mysql/postgres)"
-  default = "postgres"
-}
-
 variable "enable" {
   description = "Enable provisioning cloud infrastructure"
   default = 1
