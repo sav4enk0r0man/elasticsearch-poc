@@ -67,3 +67,17 @@ output "logstash_node2_network" {
   description = "Logstash network"
   value = "${module.logstash_node2.logstash_network}"
 }
+
+###############################################################################
+# Salt master outputs
+###############################################################################
+
+output "salt_master_fip" {
+  description = "Salt master fip"
+  value = "${module.salt_master.salt_master_fip}"
+}
+
+output "salt_master_network" {
+  description = "Salt master network"
+  value = "${module.salt_master.salt_master_network}"
+}

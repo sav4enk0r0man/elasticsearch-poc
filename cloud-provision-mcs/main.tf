@@ -124,3 +124,30 @@ module "kibana" {
   ssh_private_key        = "${var.ssh_private_key}"
   kibana_enable          = "${var.enable}"
 }
+
+# Provisioning Salt master host
+module "salt_master" {
+  source                 = "./salt-master"
+
+  hostname                 = "elk-salt-master"
+  network_id               = "${openstack_networking_network_v2.elk_network.id}"
+  subnet_id                = "${openstack_networking_subnet_v2.elk_subnet.id}"
+  salt_master_keypair      = "${var.keypair}"
+  ssh_dir                  = "${var.ssh_dir}"
+  ssh_private_key          = "${var.ssh_private_key}"
+  ansible_provision_prefix = "${var.ansible_provision_prefix}"
+  salt_minion_addresess    = [
+    "${length(module.elasticsearch_node1.elasticsearch_fip) > 0 ? element("${module.elasticsearch_node1.elasticsearch_fip}", 0) : null}",
+    "${length(module.elasticsearch_node2.elasticsearch_fip) > 0 ? element("${module.elasticsearch_node2.elasticsearch_fip}", 0) : null}",
+    "${length(module.elasticsearch_node3.elasticsearch_fip) > 0 ? element("${module.elasticsearch_node3.elasticsearch_fip}", 0) : null}",
+    "${length(module.logstash_node1.logstash_fip) > 0 ? element("${module.logstash_node1.logstash_fip}", 0) : null}",
+    "${length(module.logstash_node2.logstash_fip) > 0 ? element("${module.logstash_node2.logstash_fip}", 0) : null}",
+    "${length(module.kibana.kibana_fip) > 0 ? element("${module.kibana.kibana_fip}", 0) : null}",
+  ]
+  provision_commands       = [
+    "sudo rm -rf /srv",
+    "sudo git clone ${var.salt_repo} /srv"
+  ]
+  accept_minion_keys       = "${var.accept_minion_keys}"
+  salt_master_enable       = "${var.enable}"
+}

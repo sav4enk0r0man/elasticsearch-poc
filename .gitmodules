@@ -1,0 +1,3 @@
+[submodule "terraform-mcs-salt"]
+	path = terraform-mcs-salt
+	url = https://github.com/sav4enk0r0man/terraform-mcs-salt.git

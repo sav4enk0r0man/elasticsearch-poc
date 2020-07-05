@@ -21,9 +21,19 @@ variable "ssh_private_key" {
   default = "rsa2048_r.savchenko_mail.ru"
 }
 
-variable "db_type" {
-  description = "Rundeck database type (mysql/postgres)"
-  default = "postgres"
+variable "ansible_provision_prefix" {
+  description = "Ansible provision directory prefix"
+  default = "ansible-provision/"
+}
+
+variable "accept_minion_keys" {
+  description = "Accept minion keys (1/0)"
+  default = 1
+}
+
+variable "salt_repo" {
+  description = "Salt state repository"
+  default = "https://github.com/sav4enk0r0man/elasticsearch-poc.git"
 }
 
 variable "enable" {
